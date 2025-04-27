@@ -1,38 +1,38 @@
 package com.ps;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    static Scanner scanner= new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
+    static ArrayList<Transaction> transactions = new ArrayList<>();
+
     public static void main(String[] args) {
+        loadTransactions();
 
         int mainMenuCommand;
 
-        do{
+        do {
             System.out.println("\nWelcome to Your Financial Tracker");
             System.out.println("\n1) Add Deposit");
             System.out.println("2) Make Payment");
             System.out.println("3) Ledger");
             System.out.println("0) Exit");
             System.out.print("\nEnter Option:");
-            mainMenuCommand=scanner.nextInt();
+            mainMenuCommand = scanner.nextInt();
             scanner.nextLine();
-            
-            switch (mainMenuCommand){
+
+            switch (mainMenuCommand) {
                 case 1:
-                    //display add deposit option
                     addDeposit();
                     break;
                 case 2:
-                    //display add make payment option
                     makePayment();
                     break;
                 case 3:
-                    //display ledger
                     ledger();
                     break;
                 case 0:
@@ -42,11 +42,19 @@ public class Main {
                     System.out.println("\nInvalid input! Try again.");
             }
 
-        }while(mainMenuCommand !=0);
+        } while (mainMenuCommand != 0);
 
     }
 
     private static void addDeposit() {
+        try {
+            FileWriter fileWriter = new FileWriter("transactions.csv");
+            BufferedWriter bufWriter = new BufferedWriter(fileWriter);
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static void makePayment() {
@@ -56,16 +64,16 @@ public class Main {
         int ledgeMenuCommand;
 
         System.out.println("\n--mainMenu: Ledger--");
-        System.out.println("\n1)Display All Entries:");
+        System.out.println("\n1)Display All Entries");
         System.out.println("2)Filter by Deposit");
         System.out.println("3)Filter by Payment");
         System.out.println("4)Repots");
         System.out.println("0)Back to Main Menu");
         System.out.print("\nEnter Option from Ledger Menu:");
-        ledgeMenuCommand=scanner.nextInt();
+        ledgeMenuCommand = scanner.nextInt();
         scanner.nextLine();
 
-        switch (ledgeMenuCommand){
+        switch (ledgeMenuCommand) {
             case 1:
                 displayAllEntries();
                 break;
@@ -86,8 +94,39 @@ public class Main {
         }
     }
 
+    private static void loadTransactions() {
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.csv"));
+
+            String input;
+
+            while ((input = bufferedReader.readLine()) != null) {
+                String[] fields = input.split("\\|");
+
+                LocalDate date = LocalDate.parse(fields[0]);
+                LocalTime time = LocalTime.parse(fields[1]);
+                String department = fields[2];
+                String vendor = fields[3];
+                float price = Float.parseFloat(fields[4]);
+
+
+                Transaction transaction = new Transaction(date, time, department, vendor, price);
+
+                transactions.add(transaction);
+            }
+
+            bufferedReader.close();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }//DONE
+
     private static void displayAllEntries() {
-    }
+        for (Transaction transaction : transactions) {
+            System.out.println(transaction);
+        }
+    }//DONE
 
     private static void filterByDeposit() {
     }
@@ -97,43 +136,43 @@ public class Main {
 
     private static void reports() {
         int reportMenuCommand;
-        do{
-        System.out.println("\n--mainMenu: ledger: Reports--");
-        System.out.println("\n1)Month to Date");
-        System.out.println("2)Previous Month");
-        System.out.println("3)Year to Date");
-        System.out.println("4)Previous Year");
-        System.out.println("5)Search by Vendor");
-        System.out.println("0)Back to ledger");
-        System.out.print("\nEnter Option from Reports Menu:");
-        reportMenuCommand= scanner.nextInt();
-        scanner.nextLine();
-        
-        switch (reportMenuCommand){
-            case 1:
-                monthToDate();
-                break;
-            case 2:
-                previousMonth();
-                break;
-            case 3:
-                yearToDate();
-                break;
-            case 4:
-                previousYear();
-                break;
-            case 5:
-                searchByVendor();
-                break;
-            case 0:
-                System.out.println("\nGoing Back to Ledger Menu...");
-                ledger();
-                break;
-            default:
-                System.out.println("\nInvalid Input! Try Again...");
-        }
-                
-        }while(reportMenuCommand !=0);
+        do {
+            System.out.println("\n--mainMenu: ledger: Reports--");
+            System.out.println("\n1)Month to Date");
+            System.out.println("2)Previous Month");
+            System.out.println("3)Year to Date");
+            System.out.println("4)Previous Year");
+            System.out.println("5)Search by Vendor");
+            System.out.println("0)Back to ledger");
+            System.out.print("\nEnter Option from Reports Menu:");
+            reportMenuCommand = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (reportMenuCommand) {
+                case 1:
+                    monthToDate();
+                    break;
+                case 2:
+                    previousMonth();
+                    break;
+                case 3:
+                    yearToDate();
+                    break;
+                case 4:
+                    previousYear();
+                    break;
+                case 5:
+                    searchByVendor();
+                    break;
+                case 0:
+                    System.out.println("\nGoing Back to Ledger Menu...");
+                    ledger();
+                    break;
+                default:
+                    System.out.println("\nInvalid Input! Try Again...");
+            }
+
+        } while (reportMenuCommand != 0);
     }
 
     private static void monthToDate() {
