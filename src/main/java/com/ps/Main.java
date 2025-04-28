@@ -52,16 +52,17 @@ public class Main {
     }
 
     private static void addDeposit() {
-
         String formattedTime = now.format(formatter);
         System.out.print("Enter Description:");
         String description = scanner.nextLine();
+
         System.out.print("Enter Vendor:");
         String vendor = scanner.nextLine();
         System.out.print("Enter Amount:");
         float price = scanner.nextFloat();
 
-        String creditToAccount = formattedTime + "|" + description + "|" + vendor + "|" + price;
+        String creditToAccount = formattedTime + "|" + description.trim() + "|" + vendor.trim() + "|" + price;
+
         System.out.println("\nTransaction credited to your account successfully!");
         try {
             BufferedWriter bufWriter = new BufferedWriter(new FileWriter("transactions.csv", true));
@@ -83,7 +84,7 @@ public class Main {
         System.out.print("Enter Amount:");
         float price = scanner.nextFloat();
 
-        String debitToAccount = formattedTime + "|" + description + "|" + vendor + "|" + (price * (-1));
+        String debitToAccount = formattedTime + "|" + description.trim() + "|" + vendor.trim() + "|" + (price * (-1));
         System.out.println("\nTransaction credited to your account successfully!");
         try {
             BufferedWriter bufWriter = new BufferedWriter(new FileWriter("transactions.csv", true));
@@ -239,5 +240,14 @@ public class Main {
     }
 
     private static void searchByVendor() {
-    }
+        System.out.print("Please enter vendor name:");
+        String vendorNameInput = scanner.nextLine();
+
+        for (Transaction transaction : transactions){
+            String currentVendorName = transaction.getVendor();
+            if (currentVendorName.equalsIgnoreCase(vendorNameInput)) {
+                System.out.println("\r" + transaction);
+            }
+        }
+    }//DONE
 }
