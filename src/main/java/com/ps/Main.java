@@ -47,15 +47,27 @@ public class Main {
     }
 
     private static void addDeposit() {
-        try {
-            FileWriter fileWriter = new FileWriter("transactions.csv");
-            BufferedWriter bufWriter = new BufferedWriter(fileWriter);
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+        System.out.print("Enter Description:");
+        String description = scanner.nextLine();
+        System.out.print("Enter Vendor:");
+        String vendor = scanner.nextLine();
+        System.out.print("Enter Amount:");
+        float price = scanner.nextFloat();
 
+        String creditToAccount = currentDate + "|" + currentTime + "|" + description + "|" + vendor + "|" + price;
+        System.out.println("\nTransaction credited to your account successfully!");
+        try {
+            BufferedWriter bufWriter = new BufferedWriter(new FileWriter("transactions.csv", true));
+
+            bufWriter.write("\r"+creditToAccount);
+            bufWriter.close();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
+    }//need help adding new transaction to the list
 
     private static void makePayment() {
     }
