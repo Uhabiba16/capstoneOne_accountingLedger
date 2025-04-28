@@ -2,13 +2,17 @@ package com.ps;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Transaction> transactions = new ArrayList<>();
+    static LocalDateTime now = LocalDateTime.now();
+    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm:ss");
 
     public static void main(String[] args) {
         loadTransactions();
@@ -47,8 +51,8 @@ public class Main {
     }
 
     private static void addDeposit() {
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
+
+        String formattedTime = now.format(formatter);
         System.out.print("Enter Description:");
         String description = scanner.nextLine();
         System.out.print("Enter Vendor:");
@@ -56,21 +60,40 @@ public class Main {
         System.out.print("Enter Amount:");
         float price = scanner.nextFloat();
 
-        String creditToAccount = currentDate + "|" + currentTime + "|" + description + "|" + vendor + "|" + price;
+        String creditToAccount = formattedTime + "|" + description + "|" + vendor + "|" + price;
         System.out.println("\nTransaction credited to your account successfully!");
         try {
             BufferedWriter bufWriter = new BufferedWriter(new FileWriter("transactions.csv", true));
 
-            bufWriter.write("\r"+creditToAccount);
+            bufWriter.write("\r" + creditToAccount);
             bufWriter.close();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }//need help adding new transaction to the list
+    }//DONE
 
     private static void makePayment() {
-    }
+        String formattedTime = now.format(formatter);
+        System.out.print("Enter Description:");
+        String description = scanner.nextLine();
+        System.out.print("Enter Vendor:");
+        String vendor = scanner.nextLine();
+        System.out.print("Enter Amount:");
+        float price = scanner.nextFloat();
+
+        String debitToAccount = formattedTime + "|" + description + "|" + vendor + "|" +(price*(-1));
+        System.out.println("\nTransaction credited to your account successfully!");
+        try {
+            BufferedWriter bufWriter = new BufferedWriter(new FileWriter("transactions.csv", true));
+
+            bufWriter.write("\r" + debitToAccount);
+            bufWriter.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }//DONE
 
     private static void ledger() {
         int ledgeMenuCommand;
@@ -104,7 +127,7 @@ public class Main {
             default:
                 System.out.println("\nInvalid Input! Back to Main Menu");
         }
-    }
+    }//Menu for Ledger
 
     private static void loadTransactions() {
         try {
@@ -185,7 +208,7 @@ public class Main {
             }
 
         } while (reportMenuCommand != 0);
-    }
+    }//Menu for reports
 
     private static void monthToDate() {
     }
