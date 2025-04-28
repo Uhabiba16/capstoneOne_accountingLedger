@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Transaction> transactions = new ArrayList<>();
     static LocalDateTime now = LocalDateTime.now();
@@ -82,7 +83,7 @@ public class Main {
         System.out.print("Enter Amount:");
         float price = scanner.nextFloat();
 
-        String debitToAccount = formattedTime + "|" + description + "|" + vendor + "|" +(price*(-1));
+        String debitToAccount = formattedTime + "|" + description + "|" + vendor + "|" + (price * (-1));
         System.out.println("\nTransaction credited to your account successfully!");
         try {
             BufferedWriter bufWriter = new BufferedWriter(new FileWriter("transactions.csv", true));
@@ -164,10 +165,25 @@ public class Main {
     }//DONE
 
     private static void filterByDeposit() {
-    }
+        System.out.println("\n--Deposits to The Account--");
+        for (Transaction transaction : transactions) {
+            float deposit = transaction.getAmount();
+            if (deposit > 0) {
+                System.out.println(transaction);
+            }
+        }
+
+    }//DONE
 
     private static void filterByPayment() {
-    }
+        System.out.println("\n--Payments From The Account--");
+        for (Transaction transaction : transactions) {
+            float payments = transaction.getAmount();
+            if (payments < 0) {
+                System.out.println(transaction);
+            }
+        }
+    }//DONE
 
     private static void reports() {
         int reportMenuCommand;
@@ -178,7 +194,7 @@ public class Main {
             System.out.println("3)Year to Date");
             System.out.println("4)Previous Year");
             System.out.println("5)Search by Vendor");
-            System.out.println("0)Back to ledger");
+            System.out.println("0)Back to Ledger Menu");
             System.out.print("\nEnter Option from Reports Menu:");
             reportMenuCommand = scanner.nextInt();
             scanner.nextLine();

@@ -59,7 +59,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "\nTransaction{" +
+        return "\rTransaction{" +
                 "date=" + date +
                 ", time=" + time +
                 ", description='" + description + '\'' +
