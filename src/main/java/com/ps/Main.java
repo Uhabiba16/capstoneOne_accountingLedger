@@ -85,7 +85,7 @@ public class Main {
         float price = scanner.nextFloat();
 
         String debitToAccount = formattedTime + "|" + description.trim() + "|" + vendor.trim() + "|" + (price * (-1));
-        System.out.println("\nTransaction credited to your account successfully!");
+        System.out.println("\nTransaction debited from your account successfully!");
         try {
             BufferedWriter bufWriter = new BufferedWriter(new FileWriter("transactions.csv", true));
 
@@ -171,6 +171,8 @@ public class Main {
             float deposit = transaction.getAmount();
             if (deposit > 0) {
                 System.out.println(transaction);
+            }else{
+                System.out.println("No deposit made to the Account.");
             }
         }
 
@@ -228,12 +230,35 @@ public class Main {
     }//Menu for reports
 
     private static void monthToDate() {
+        System.out.println("Please enter month and year for monthly report:");
+        System.out.print("Input Year:");
+        int yearInput= scanner.nextInt();
+
+        System.out.print("Input Month:");
+        int monthInput= scanner.nextInt();
+
+        for (Transaction transaction: transactions){
+            int tYear=transaction.getDate().getYear();
+            int tMonth=transaction.getDate().getMonthValue();
+            if (tYear == yearInput && monthInput==tMonth) {
+                System.out.println(transaction);
+            }
+        }
     }
 
     private static void previousMonth() {
     }
 
     private static void yearToDate() {
+        System.out.print("PLease enter the year for annual report:");
+        int yearInput= scanner.nextInt();
+
+        for (Transaction transaction: transactions){
+            int tYear=transaction.getDate().getYear();
+            if (tYear==yearInput) {
+                System.out.println(transaction);
+            }
+        }
     }
 
     private static void previousYear() {
@@ -243,11 +268,11 @@ public class Main {
         System.out.print("Please enter vendor name:");
         String vendorNameInput = scanner.nextLine();
 
-        for (Transaction transaction : transactions){
+        for (Transaction transaction : transactions) {
             String currentVendorName = transaction.getVendor();
             if (currentVendorName.equalsIgnoreCase(vendorNameInput)) {
                 System.out.println("\r" + transaction);
             }
         }
-    }//DONE
+    }//DONE but come back and use boolean
 }
