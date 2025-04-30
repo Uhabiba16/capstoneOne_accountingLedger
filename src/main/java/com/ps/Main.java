@@ -171,7 +171,7 @@ public class Main {
             float deposit = transaction.getAmount();
             if (deposit > 0) {
                 System.out.println(transaction);
-            }else{
+            } else {
                 System.out.println("No deposit made to the Account.");
             }
         }
@@ -230,39 +230,48 @@ public class Main {
     }//Menu for reports
 
     private static void monthToDate() {
-        System.out.println("Please enter month and year for monthly report:");
-        System.out.print("Input Year:");
-        int yearInput= scanner.nextInt();
-
-        System.out.print("Input Month:");
-        int monthInput= scanner.nextInt();
-
-        for (Transaction transaction: transactions){
-            int tYear=transaction.getDate().getYear();
-            int tMonth=transaction.getDate().getMonthValue();
-            if (tYear == yearInput && monthInput==tMonth) {
+        System.out.println("--Month to Date Transactions--\n");
+        int currentMonth = LocalDate.now().getMonthValue();
+        for (Transaction transaction : transactions) {
+            int tMonth = transaction.getDate().getMonthValue();
+            if (tMonth == currentMonth) {
                 System.out.println(transaction);
             }
         }
-    }
+    }//DONE
 
     private static void previousMonth() {
-    }
+        System.out.println("--Transactions from Last Month--\n");
+        int currentMonth = LocalDate.now().getMonthValue();
+        for (Transaction transaction : transactions) {
+            int tMonth = transaction.getDate().getMonthValue();
+            if (tMonth == currentMonth - 1) {
+                System.out.println(transaction);
+            }
+        }
+    }//DONE
 
     private static void yearToDate() {
-        System.out.print("PLease enter the year for annual report:");
-        int yearInput= scanner.nextInt();
-
-        for (Transaction transaction: transactions){
-            int tYear=transaction.getDate().getYear();
-            if (tYear==yearInput) {
+        System.out.println("--Year To Date Transactions--\n");
+        int currentYear = LocalDate.now().getYear();
+        for (Transaction transaction : transactions) {
+            int tYear = transaction.getDate().getYear();
+            if (tYear == currentYear) {
                 System.out.println(transaction);
             }
         }
     }
 
     private static void previousYear() {
-    }
+        System.out.println("--Transactions from Last Year--\n");
+        int currentYear = LocalDate.now().getYear();
+        for (Transaction transaction : transactions) {
+            int tYear = transaction.getDate().getYear();
+            if (tYear == currentYear - 1) {
+                System.out.println(transaction);
+            }
+        }
+    }//DONE
 
     private static void searchByVendor() {
         System.out.print("Please enter vendor name:");
