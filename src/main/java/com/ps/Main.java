@@ -228,12 +228,12 @@ public class Main {
 
     private static void monthToDate() {
         System.out.println("--Month to Date Transactions--\n");
-        int currentYear=LocalDate.now().getYear();
+        int currentYear = LocalDate.now().getYear();
         int currentMonth = LocalDate.now().getMonthValue();
         for (Transaction transaction : transactions) {
-            int tYear=transaction.getDate().getYear();
+            int tYear = transaction.getDate().getYear();
             int tMonth = transaction.getDate().getMonthValue();
-            if (tMonth == currentMonth && tYear==currentYear) {
+            if (tMonth == currentMonth && tYear == currentYear) {
                 System.out.println(transaction);
             }
         }
@@ -241,12 +241,12 @@ public class Main {
 
     private static void previousMonth() {
         System.out.println("--Transactions from Last Month--\n");
-        int currentYear=LocalDate.now().getYear();
+        int currentYear = LocalDate.now().getYear();
         int currentMonth = LocalDate.now().getMonthValue();
         for (Transaction transaction : transactions) {
-            int tYear=transaction.getDate().getYear();
+            int tYear = transaction.getDate().getYear();
             int tMonth = transaction.getDate().getMonthValue();
-            if (tYear==currentYear&&(tMonth == currentMonth - 1)) {
+            if (tYear == currentYear && (tMonth == currentMonth - 1)) {
                 System.out.println(transaction);
             }
         }
@@ -277,7 +277,7 @@ public class Main {
     private static void searchByVendor() {
         System.out.print("Please enter vendor name:");
         String vendorNameInput = scanner.nextLine();
-        System.out.println("\nTransactions filtered by Vendor:"+vendorNameInput.toUpperCase());
+        System.out.println("\nTransactions filtered by Vendor:" + vendorNameInput.toUpperCase());
         for (Transaction transaction : transactions) {
             String currentVendorName = transaction.getVendor();
             if (currentVendorName.equalsIgnoreCase(vendorNameInput)) {
