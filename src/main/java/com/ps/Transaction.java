@@ -4,12 +4,12 @@ import java.time.LocalTime;
 
 public class Transaction {
     private LocalDate date;
-    private LocalTime time;
+    private String time;
     private String description;
     private String vendor;
     private float amount;
 
-    public Transaction(LocalDate date, LocalTime time, String description, String vendor, float amount) {
+    public Transaction(LocalDate date, String time, String description, String vendor, float amount) {
         this.date = date;
         this.time = time;
         this.description = description;
@@ -25,11 +25,11 @@ public class Transaction {
         this.date = date;
     }
 
-    public LocalTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -59,13 +59,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "\rTransaction{" +
-                "date=" + date +
-                ", time=" + time +
-                ", description='" + description + '\'' +
-                ", vendor='" + vendor + '\'' +
-                ", amount=" + amount +
-                '}';
+        return  date + "|" + time + "|" + description  + "|" + vendor + "|" + amount;
     }
 
 }
