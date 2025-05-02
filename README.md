@@ -40,8 +40,12 @@ of the month we are in.
 ---
 # ScreenShots
 ![Screenshot 2025-05-02 015326](https://github.com/user-attachments/assets/81f70d7e-f833-426d-8614-485e20eef3b1)
+
 ![Screenshot 2025-05-02 015501](https://github.com/user-attachments/assets/5d6ae66c-a7b1-4d9d-86ca-959153a12bc8)
+
 ![Screenshot 2025-05-02 015430](https://github.com/user-attachments/assets/54a32b16-cca9-4c7b-8b6f-3160cb03564c)
+
 ![Screenshot 2025-05-02 015417](https://github.com/user-attachments/assets/cb564210-ea5c-4e2b-9256-fb07c3735752)
+
 ![Screenshot 2025-05-02 015400](https://github.com/user-attachments/assets/0b612b69-e7fb-4d67-ae79-571025fb2124)
 
