@@ -39,7 +39,7 @@ of the month we are in.
 
 ---
 # ScreenShots
-![](C:\Users\Student\pluralsight\capstones\capstone1\screenshots\Screenshot 2025-05-02 015326.png "Methods")
+![Screenshot 2025-05-02 015326](https://github.com/user-attachments/assets/81f70d7e-f833-426d-8614-485e20eef3b1)
 ![the welcome menu](C:\Users\Student\pluralsight\capstones\capstone1\screenshots\Screenshot 2025-05-02 015400.png "welcome")
 ![](C:\Users\Student\pluralsight\capstones\capstone1\screenshots\Screenshot 2025-05-02 015417.png "ledgerMenu")
 ![](C:\Users\Student\pluralsight\capstones\capstone1\screenshots\Screenshot 2025-05-02 015430.png "reportsSubMenu")
