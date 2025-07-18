@@ -274,6 +274,9 @@ public class Main {
         }
     }
 
+
+    //TEST
+
     private static void searchByVendor() {
         System.out.print("Please enter vendor name:");
         String vendorNameInput = scanner.nextLine();
